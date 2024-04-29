@@ -1,0 +1,15 @@
+{
+    "name": "Breakout-X",
+    "short_name": "Breakout-X",
+    "icons": [
+        {
+            "src": "https://cdn.jsdelivr.net/gh/Breakout-X/breakout-x.github.io@gh-pages/static/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "start_url": "https://breakout-x.github.io/",
+    "display": "standalone"
+}
