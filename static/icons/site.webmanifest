@@ -15,6 +15,6 @@
     ],
     "theme_color": "#0004ff",
     "background_color": "#0004ff",
-    "start_url": "https://breakout-x.github.io",
+    "start_url": "https://breakout-x.github.io/",
     "display": "standalone"
 }
