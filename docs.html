@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breakout-X documents</title>
+    <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var d = urlParams.get('d');
+            if (d) {
+                window.location.href = "https://web-breakout.github.io/docs/" + d;
+            } else {
+                window.location.href = "https://breakout-x.github.io/404";
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
