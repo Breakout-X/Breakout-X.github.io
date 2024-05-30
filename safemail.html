@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>If this text is visible, your request was denied and your browser may crash.</h1>
+<style>
+  body {
+    background-color: black;
+    color: white;
+  }
+</style>
 <noscript>If this text is visible, you disabled JavaScript, meaning that you probably went here by accident. If this was an accident, please leave.</noscript>
 <script>
 // Parse the URL parameters
@@ -14,31 +19,28 @@ const token = urlParams.get('token');
 const validTos = ['eledlowstudios', 'ledlowlittle'];
 const validSites = ['outlook.com', 'gmail.com'];
 
-// Check if 'to' and 'site' are valid
-if (!validTos.includes(to) || !validSites.includes(site)) {
-  // If 'to' or 'site' is not valid, cause a memory overflow to crash the page to prevent spammers from using invalid mail requests
-  const crashPage = () => {
-    let x = [];
-    while (true) {
-      x.push(new Array(5 * 1024 * 1024)); // Allocate 5MB repeatedly
-    }
-  };
-  crashPage();
-}
-
-// Check the token for authorization and set the default message
+// Check the token and parameters for authorization and set the default message
 let defaultMessage = '';
 let redirectUrl = '';
 if (!token) {
   // If the token is missing, redirect to the 404 page
   redirectUrl = 'https://Breakout-X.github.io/404';
 } else if (token === 'WB021209') {
-  // If the token is valid, construct the mailto link
-  defaultMessage = 'Tell us your name and reason of why you want to contribute to Web-Breakout';
-  redirectUrl = `mailto:${to}@${site}?body=${encodeURIComponent(defaultMessage)}`;
+  // If the token is valid, construct the mailto link if the mail is correct.
+  if (('breakout\\' + site + '$' + to) === "breakout\\outlook.com$eledlowstudios") {
+    defaultSubject = 'Web-Breakout contribution.';
+    defaultMessage = 'Greetings.\n Please tell us your age, name, and the reason of why you wish to contribute to Web-Breakout.';
+    redirectUrl = `mailto:${to}@${site}?head=${encodeURIComponent(defaultSubject)}&body=${encodeURIComponent(defaultMessage)}`;
+  } else {
+    // Else, redirect to an invalid ELedlow Studios page
+    redirectUrl = `https://ELedlow-Studios.github.io/${token}-wrong`;
+  }
+} else if (!validTos.includes(to) || !validSites.includes(site)) {
+  // If the parameters are invalid, redirect to an invalid page on ELedlow Studios
+  redirectUrl = `https://ELedlow-Studios.github.io/${token}-denied`;
 } else {
-  // If the token is invalid, redirect to the security violation page
-  redirectUrl = 'https://ELedlow-Studios.github.io/MAJOR%20SECURITY%20VIOLATION';
+  // If the token is invalid, redirect to an invalid page on ELedlow Studios.
+  redirectUrl = `https://ELedlow-Studios.github.io/${token}-depreciated`;
 }
 
 // Try to redirect to the appropriate URL
